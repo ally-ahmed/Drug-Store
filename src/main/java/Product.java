@@ -6,20 +6,22 @@ public class Product{
 	private int id;
 	private String name;
 	private String description;
-	public int price;
-	public int quantity;
+	private int price;
+	private int quantity;
 	
-	public static final int MAX_INVENTORY = 10;
-	public static final int MIN_INVENTORY = 0;
+	public static final int MAX_QUANTITY = 10;
+	public static final int MIN_QUANTITY = 0;
 	
 	public Product(String name, String description, int price){
 		this.name = name;
 		this.description = description;
-		quantiy = 0;
+		this.price = price;
+		
+		quantity = 0;
 	}
 	
 	public String getName(){
-		return name
+		return name;
 	}
 	
 	 public String getDescription() {
@@ -47,6 +49,16 @@ public class Product{
     }
   }
 	
+	public static Product find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM products WHERE id = :id";
+      return con.createQuery(sql)
+        .addParameter("id", id)
+        .throwOnMappingFailure(false)
+				.executeAndFetchFirst(Product.class);
+    }
+  }
+	
 	public static Product findProduct(String name) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM products WHERE name = :name";
@@ -58,7 +70,7 @@ public class Product{
 	
 	
 	public void restock(){
-		quantity = MAX_QUANTITY;
+		this.quantity = MAX_QUANTITY;
 		try(Connection con = DB.sql2o.open()){
 			String sql = "UPDATE products SET quantity = :quantity WHERE id = :id;";
 			con.createQuery(sql)
@@ -96,8 +108,16 @@ public class Product{
   }
 	
 	public void subtractQuantity() {
-    this.Quantity--;
+    this.quantity--;
     updateQuantity();
+  }
+	
+	public void depleteQuantity(int amount){
+    if (!(inStock())){
+       throw new UnsupportedOperationException("We are out of stock");
+     } else {
+       subtractQuantity();
+    }
   }
 	
 	public void updateQuantity(){
@@ -132,16 +152,10 @@ public class Product{
     }
   }
 	
-	public void depleteQuantity(int amount){
-    if (!(inStock())){
-       throw new UnsupportedOperationException("We are out of stock");
-     } else {
-       subtractQuantity();
-    }
-  }
+	
 	
 	public boolean inStock() {
-    if (Quantity <= MIN_Quantity) {
+    if (quantity <= MIN_QUANTITY) {
       return false;
     } else{
     return true;
