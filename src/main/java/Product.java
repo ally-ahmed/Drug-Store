@@ -2,28 +2,29 @@ import org.sql2o.*;
 import java.util.*;
 
 public class Product{
-	
+
 	private int id;
 	private String name;
 	private String description;
 	private int price;
 	private int quantity;
-	
+
 	public static final int MAX_QUANTITY = 10;
 	public static final int MIN_QUANTITY = 0;
-	
+
+
 	public Product(String name, String description, int price){
 		this.name = name;
 		this.description = description;
 		this.price = price;
-		
+
 		quantity = 0;
 	}
-	
+
 	public String getName(){
 		return name;
 	}
-	
+
 	 public String getDescription() {
     return description;
   }
@@ -35,12 +36,12 @@ public class Product{
   public int getId() {
     return id;
   }
-	
-	
+
+
   public int getQuantity() {
     return quantity;
   }
-	
+
 	public static List <Product> all() {
     String sql = "SELECT * FROM products;";
     try(Connection con = DB.sql2o.open()) {
@@ -48,7 +49,8 @@ public class Product{
 				.executeAndFetch(Product.class);
     }
   }
-	
+
+
 	public static Product find(int id) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM products WHERE id = :id";
@@ -58,7 +60,7 @@ public class Product{
 				.executeAndFetchFirst(Product.class);
     }
   }
-	
+
 	public static Product findProduct(String name) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM products WHERE name = :name";
@@ -67,8 +69,8 @@ public class Product{
         .throwOnMappingFailure(false).executeAndFetchFirst(Product.class);
     }
   }
-	
-	
+
+
 	public void restock(){
 		this.quantity = MAX_QUANTITY;
 		try(Connection con = DB.sql2o.open()){
@@ -80,7 +82,7 @@ public class Product{
 				.executeUpdate();
 		}
 	}
-	
+
 	public void save(){
 		try(Connection con = DB.sql2o.open()){
 			String sql = "INSERT INTO products (name,description,price,quantity) VALUES (:name,:description,:price,:quantity);";
@@ -93,7 +95,7 @@ public class Product{
 				.getKey();
 		}
 	}
-	
+
 	public void update(String name, String description, int price) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "UPDATE products SET name = :name, description=:description, price=:price WHERE id = :id";
@@ -106,12 +108,13 @@ public class Product{
         .executeUpdate();
     }
   }
-	
+
 	public void subtractQuantity() {
     this.quantity--;
     updateQuantity();
   }
-	
+
+
 	public void depleteQuantity(int amount){
     if (!(inStock())){
        throw new UnsupportedOperationException("We are out of stock");
@@ -119,7 +122,7 @@ public class Product{
        subtractQuantity();
     }
   }
-	
+
 	public void updateQuantity(){
     try(Connection con = DB.sql2o.open()) {
       String sql = "UPDATE products SET quantity = :quantity WHERE id = :id";
@@ -130,7 +133,7 @@ public class Product{
         .executeUpdate();
     }
   }
-	
+
 	@Override
     public boolean equals(Object otherProduct) {
       if (!(otherProduct instanceof Product)) {
@@ -142,7 +145,7 @@ public class Product{
                this.getPrice() == newProduct.getPrice();
     }
   }
-	
+
 	 public void delete() {
     try(Connection con = DB.sql2o.open()){
       String sql = "DELETE FROM products WHERE id =:id";
@@ -151,9 +154,7 @@ public class Product{
         .executeUpdate();
     }
   }
-	
-	
-	
+
 	public boolean inStock() {
     if (quantity <= MIN_QUANTITY) {
       return false;
@@ -162,7 +163,7 @@ public class Product{
     }
   }
 
- 
+
 
 
 }
