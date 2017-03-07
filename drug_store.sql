@@ -75,7 +75,8 @@ CREATE TABLE products (
     id integer NOT NULL,
     description character varying,
     price integer,
-    quantity integer
+    quantity integer,
+    name character varying
 );
 
 
@@ -179,7 +180,7 @@ SELECT pg_catalog.setval('customers_id_seq', 1, false);
 -- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: vagabond
 --
 
-COPY products (id, description, price, quantity) FROM stdin;
+COPY products (id, description, price, quantity, name) FROM stdin;
 \.
 
 
