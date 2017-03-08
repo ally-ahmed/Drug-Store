@@ -6,12 +6,12 @@ import java.text.SimpleDateFormat;
 public class Transaction{
 	int id;
 	Timestamp date;
-	private int salePrice;
-	private int productId;
-	private int customerId;
-	private String productName;
+	int salePrice;
+ int productId;
+ int customerId;
+ String productName;
 	
-	public static final int MONTHLY_SALES_GOAL = 10;
+	
 	public static final int MONTHLY_SALES_GOAL = 10;
   public static final int QRTRLY_SALES_GOAL = 25;
   public static final long QUARTER = 5616000000l;
@@ -19,10 +19,9 @@ public class Transaction{
 	
 	public Transaction(int productId, int customerId){
 		this.productId = productId;
-		Product product = null;
-		product = Product.find(productId);
+		Product product = Product.find(productId);
 		this.productName = product.getName();
-		this.pruductPrice = product.getPrice();
+		this.salePrice = product.getPrice();
 		this.customerId = customerId;
 		
 	}
@@ -63,7 +62,7 @@ public class Transaction{
   }
 	
 	public String getFormattedDate(){
-		simpleDateFormat formatter = new SimpleDateFormat("EEE, MMM dd yyyy hh:mm a");
+		SimpleDateFormat formatter = new SimpleDateFormat("EEE, MMM dd yyyy hh:mm a");
 		return formatter.format(date);
 	}
 	

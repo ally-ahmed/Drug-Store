@@ -30,12 +30,12 @@ public class CustomerTest {
       customerOne.save();
       assertEquals(true, Customer.all().get(0).equals(customerOne));
     }
-    //
+    
     @Test
     public void all_returnsAllCustomers_true () {
       Customer customerOne = new Customer("Brian", "Brian@email.com");
       customerOne.save();
-      Customer customerTwo = new Customer("Brian", "Brian@email.com");
+      Customer customerTwo = new Customer("ahmed", "norbixin@email.com");
       customerTwo.save();
       assertEquals(true, Customer.all().get(0).equals(customerOne));
       assertEquals(true, Customer.all().get(1).equals(customerTwo));
