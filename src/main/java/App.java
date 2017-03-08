@@ -20,8 +20,26 @@ public class App {
     }, new VelocityTemplateEngine());
 		
 		
+		get("/allProducts", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+			model.put("products", Product.all());
+      model.put("template", "templates/allProducts.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 		
+		post("/allProducts/:product_id/delete", (request, response) -> {
+      int productId = Integer.parseInt(request.params("product_id"));
+      Product.find(Integer.parseInt(request.params(":product_id"))).delete();
+      response.redirect("/allProducts");
+      return null;
+    });
 		
+		post("allProducts/products/:product_id/restock", (request, response) -> {
+      int productId = Integer.parseInt(request.params("product_id"));
+      Product.find(Integer.parseInt(request.params(":product_id"))).restock();
+      response.redirect("/allProducts");
+      return null;
+    });
 		
 		
 	}
