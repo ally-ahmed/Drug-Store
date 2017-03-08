@@ -12,17 +12,32 @@ public class App {
 	public static void main(String[] args) {
 		String layout = "templates/layout.vtl";
     staticFileLocation("/public");
-		
+
 		get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
-		
-		
-		
-		
-		
-		
+
+
+		get("/products/new", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/product-form.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+
+		post("/products/new", (request, response) -> {
+		 String productName = request.queryParams("product-name");
+		 String productDescription = request.queryParams("product-description");
+		 int productPrice = Integer.parseInt(request.queryParams("product-price"));
+		 response.redirect("/allProducts");
+		 return new ModelAndView(model, layout);
+	 }, new VelocityTemplateEngine());
+
+
+
+
+
 	}
 }
