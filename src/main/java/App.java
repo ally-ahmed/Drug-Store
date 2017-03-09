@@ -12,13 +12,12 @@ public class App {
 	public static void main(String[] args) {
 		String layout = "templates/layout.vtl";
     staticFileLocation("/public");
-		
+
 		get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
-		
 		
 		get("/allProducts", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
@@ -34,13 +33,42 @@ public class App {
       return null;
     });
 		
-		post("allProducts/products/:product_id/restock", (request, response) -> {
+		post("allProducts/:product_id/restock", (request, response) -> {
       int productId = Integer.parseInt(request.params("product_id"));
       Product.find(Integer.parseInt(request.params(":product_id"))).restock();
       response.redirect("/allProducts");
       return null;
     });
 		
+
+		get("/products/new", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/product-form.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+
+		post("/allProducts", (request, response) -> {
+		 String productName = request.queryParams("product-name");
+		 String productDescription = request.queryParams("product-description");
+		 int productPrice = Integer.parseInt(request.queryParams("product-price"));
+			Product newProduct = new Product(productName,productDescription,productPrice);
+			newProduct.save();
+		 response.redirect("/allProducts");
+			return null;
+	  }, new VelocityTemplateEngine());
+	
 		
+		get("/reports", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("all-transactions", Transaction.all());
+      model.put("monthly-transactions",Transaction.findMonthlyTransactions());
+      model.put("quarterly-transactions",Transaction.findQuarterlyTransactions());
+      model.put("Transaction", Transaction.class);
+      model.put("template", "templates/reports.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+
 	}
 }

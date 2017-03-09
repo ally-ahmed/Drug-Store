@@ -50,7 +50,6 @@ public class Product{
     }
   }
 
-
 	public static Product find(int id) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM products WHERE id = :id";
