@@ -14,21 +14,16 @@
 
 	<!-- Bootstrap core CSS     -->
 	 <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+   <link href="/css/light-bootstrap-dashboard.css" rel="stylesheet" />
+   <link href="/css/demo.css" rel="stylesheet" />
+	 <link rel="stylesheet" href="/css/styles.css">
+	  <link href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.css
+   ' rel='stylesheet' />
+   <link href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.print.css
+' rel='stylesheet' media='print' />
 
 
-	<!-- Animation library for notifications   -->
 
-
-	<!--  Light Bootstrap Table core CSS    -->
-	<link href="/css/light-bootstrap-dashboard.css" rel="stylesheet" />
-
-
-	<!--  CSS for Demo Purpose, don't include it in your project     -->
-	<link href="/css/demo.css" rel="stylesheet" />
-	<link rel="stylesheet" href="/css/styles.css">
-
-
-	<!--     Fonts and icons     -->
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
 	<link href="/css/pe-icon-7-stroke.css" rel="stylesheet" />
@@ -67,6 +62,15 @@
 							<p>New Product</p>
 						</a>
 					</li>
+
+					<li>
+						<a href="/calendar">
+							<i class="pe-7s-date"></i>
+							<p>Calendar</p>
+						</a>
+					</li>
+
+
 
 
 
@@ -145,29 +149,42 @@
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
       crossorigin="anonymous"></script>
 
+			<script
+			  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+			  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+			  crossorigin="anonymous"></script>
+
+
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
-		 <script src="js/script.js"></script>
+
+		 <script
+	 	 src='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js'></script>
+
+
+	 <script src="/js/moment.min.js"></script>
 
 
 <!--  Checkbox, Radio & Switch Plugins -->
 <script src="/js/bootstrap-checkbox-radio-switch.js"></script>
 
 <!--  Charts Plugin -->
-<script src="/js/chartist.min.js"></script>
+<!-- <script src="/js/chartist.min.js"></script> -->
 
 <!--  Notifications Plugin    -->
 <script src="/js/bootstrap-notify.js"></script>
 
-<!--  Google Maps Plugin    -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 <script src="/js/light-bootstrap-dashboard.js"></script>
 
 <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 <script src="/js/demo.js"></script>
+
+<script src="/js/script.js" charset="utf-8"></script>
+
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -184,7 +201,9 @@
 		});
 
 	});
-</script>
+	</script>
+
+
   ]]#
 
 </body>
