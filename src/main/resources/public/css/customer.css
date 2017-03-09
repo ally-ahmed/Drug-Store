@@ -1,0 +1,44 @@
+.login-logo{
+  font-size: 35px;
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 300;
+}
+.login-logo a{
+  color: #444;
+}
+
+.login-box {
+  width: 360px;
+  margin: 7% auto;
+}
+@media (max-width: 768px) {
+  .login-box{
+    width: 90%;
+    margin-top: 20px;
+  }
+}
+.login-box-body{
+  background: #fff;
+  padding: 20px;
+  border-top: 0;
+  /*color: #666;*/
+}
+/*.login-box-body .form-control-feedback{
+  color: #777;
+}*/
+.login-box-msg {
+  margin: 0;
+  text-align: center;
+  padding: 0 20px 20px 20px;
+}
+.container, body{
+    background: #d2d6de;
+    width: inherit;
+    height: 2000px;
+
+
+}
+button{
+  color: #fff;
+}
