@@ -1,0 +1,111 @@
+<style>
+
+	body{
+	background:#eceadf;
+}
+.navbar{
+	margin-bottom: 0px;
+	background-color:#428bca;
+}
+.navbar-default .navbar-nav>li>a {
+    color: white;
+}
+.navbar-default .navbar-brand {
+    color: white;
+}
+.banner img{
+/*	height:20vh;*/
+	width:100vw;
+	margin-bottom: 40px;
+	
+}
+
+
+</style>
+<nav class="navbar navbar-default" role="navigation">
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="#">Hi $customers.get(0).getName()!</a>
+	</div>
+
+	<!-- Collect the nav links, forms, and other content for toggling -->
+	<div class="collapse navbar-collapse navbar-ex1-collapse">
+		
+		
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="#">Admin</a></li>
+			
+		</ul>
+	</div><!-- /.navbar-collapse -->
+</nav>
+
+	<div class="banner">
+		<img src="images/dug_banner.jpg" alt="">
+	</div> 
+	<div class="product-list container">
+		<div class="panel panel-primary">
+	  <div class="panel-heading">
+			<h3 class="panel-title">Product List</h3>
+	  </div>
+	  <div class="panel-body">
+			
+		<table id="example" class="table " cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Descripton</th>
+                <th>Price</th>
+                <th>Purchase</th>
+                
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Descripton</th>
+                <th>Price</th>
+                <th>Purchase</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr>
+               #foreach($product in $products)
+                <td>$product.getName()</td>
+                <td>$product.getDescription()</td>
+                <td>$product.getPrice()</td>
+                <form action="/users/$customer.getId()/products/$product.getId()/purchase" method="post"></form>
+                <td><button type="submit" class="btn btn-success">Purchase</button></td>
+               
+            </tr>
+               <tr>
+              <td>Tiger Nixon</td>
+                <td>System Architect</td>
+                <td>Edinburgh</td>
+                
+                <td><button type="button" class="btn btn-success">Purchase</button></td>
+            </tr>
+               <tr>
+                <td>Tiger Nixon</td>
+                <td>System Architect</td>
+                <td>Edinburgh</td>
+       
+                <td><button type="button" class="btn btn-success">[button]</button></td>
+            </tr>
+           
+       
+        </tbody>
+    </table>
+	 
+</div>
+
+		
+		
+		
+	</div>
+	</div>
