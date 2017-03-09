@@ -11,6 +11,7 @@ public class App {
 
 	public static void main(String[] args) {
 		String layout = "templates/layout.vtl";
+		String customerlayout = "templates/customerlayout.vtl";
     staticFileLocation("/public");
 
 		get("/", (request, response) -> {
@@ -18,28 +19,28 @@ public class App {
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
-		
+
 		get("/allProducts", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
 			model.put("products", Product.all());
       model.put("template", "templates/allProducts.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
-		
+
 		post("/allProducts/:product_id/delete", (request, response) -> {
       int productId = Integer.parseInt(request.params("product_id"));
       Product.find(Integer.parseInt(request.params(":product_id"))).delete();
       response.redirect("/allProducts");
       return null;
     });
-		
+
 		post("allProducts/:product_id/restock", (request, response) -> {
       int productId = Integer.parseInt(request.params("product_id"));
       Product.find(Integer.parseInt(request.params(":product_id"))).restock();
       response.redirect("/allProducts");
       return null;
     });
-		
+
 
 		get("/products/new", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
@@ -57,8 +58,8 @@ public class App {
 		 response.redirect("/allProducts");
 			return null;
 	  }, new VelocityTemplateEngine());
-	
-		
+
+
 		get("/reports", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("all-transactions", Transaction.all());
@@ -75,23 +76,35 @@ public class App {
 		 return new ModelAndView(model, layout);
 	 }, new VelocityTemplateEngine());
 		
+	
+	 get("/login", (request, response) -> {
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("template", "templates/login.vtl");
+		return new ModelAndView(model, customerlayout);
+	}, new VelocityTemplateEngine());
+		
 	get("/users/:id", (request, response) -> {
 		 Map<String, Object> model = new HashMap<String, Object>();
 			model.put("customer",Customer.find(Integer.parseInt(request.params(":id"))));
-		 model.put("customers", Customer.all());
+
 		 model.put("products", Product.all());
 		 model.put("template", "templates/customer-product.vtl");
 		 return new ModelAndView(model, customerlayout);
 	}, new VelocityTemplateEngine());
+
+	post("/users/:id", (request, response) -> {
+      String customerName = request.queryParams("customer-name");
+      String customerEmail = request.queryParams("customer-email");
+      Customer newCustomer = new Customer(customerName, customerEmail);
+      newCustomer.save();
+      response.redirect("/users/" + newCustomer.getId());
+      return null;
+    });
+
 		
-	get("/users/:customer_id/products/:product_id/outofstock", (request, response) -> {
-		Map<String, Object> model = new HashMap<String, Object>();
-		int customerId = Integer.parseInt(request.params("customer_id"));
-		model.put("id", customerId);
-		model.put("message", request.session().attribute("message"));
-		model.put("template", "templates/out-of-stock.vtl");
-	 return new ModelAndView(model, layout);
-	}, new VelocityTemplateEngine());
+	
+		
+
 		
 	post("/users/:customer_id/products/:product_id/purchase", (request, response) -> {
       int customerId = Integer.parseInt(request.params("customer_id"));
@@ -102,7 +115,7 @@ public class App {
      
       
       try{
-        someProduct.depleteInventory(1);
+        someProduct.depleteQuantity(1);
       }
       catch(UnsupportedOperationException e){
         request.session().attribute("message", e.getMessage());
@@ -125,6 +138,17 @@ public class App {
       model.put("template", "templates/transaction-receipt.vtl");
       return new ModelAndView(model, customerlayout);
     }, new VelocityTemplateEngine());
+
+			get("/users/:customer_id/products/:product_id/outofstock", (request, response) -> {
+		Map<String, Object> model = new HashMap<String, Object>();
+		int customerId = Integer.parseInt(request.params("customer_id"));
+		model.put("id", customerId);
+		model.put("message", request.session().attribute("message"));
+		model.put("template", "templates/out-of-stock.vtl");
+	 return new ModelAndView(model, layout);
+	}, new VelocityTemplateEngine());
+
+
 
 	}
 }
