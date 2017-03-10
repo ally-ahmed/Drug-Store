@@ -3,22 +3,14 @@
         <!-- invoice starts here -->
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper" style="background-color:white;color:black;padding:20px;">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <h1>
-              Invoice
-              <small>#007612</small>
-            </h1>
-
-            </section>
-
+          
             <!-- Main content -->
             <section class="invoice">
                 <!-- title row -->
                 <div class="row">
                     <div class="col-xs-12">
                         <h2 class="page-header">
-                  <i class="fa fa-medkit"></i> Drug Store Ltd.
+                  <i class="fa fa-medkit"></i>
                   <small class="pull-right">Date: $transaction.getFormattedDate()</small>
                 </h2>
                     </div>
@@ -65,7 +57,7 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    
+
                                     <th>Product</th>
                                     <th>Serial #</th>
                                     <th>Description</th>
@@ -74,13 +66,13 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                   
+
                                     <td>$product.getName()</td>
                                     <td>455-981-221</td>
                                     <td>$product.getDescription()</td>
                                     <td>$product.getPrice()</td>
                                 </tr>
-                                
+
                             </tbody>
                         </table>
                     </div>
@@ -107,7 +99,7 @@
 
                         <div class="table-responsive">
                             <table class="table">
-                               
+
                                 <tr>
                                     <th>Total:</th>
                                     <td>$product.getPrice()</td>
@@ -135,7 +127,7 @@
             <div class="clearfix"></div>
         </div>
         <!-- /.content-wrapper -->
-        <footer class="main-footer no-print">
+        <footer class="main-footer no-print text-center">
             <div class="pull-right hidden-xs">
 
             </div>
