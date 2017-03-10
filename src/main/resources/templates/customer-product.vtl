@@ -17,7 +17,7 @@
 /*	height:20vh;*/
 	width:100vw;
 	margin-bottom: 40px;
-	
+
 }
 
 
@@ -37,25 +37,21 @@
 
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<div class="collapse navbar-collapse navbar-ex1-collapse">
-		
-		
-		<ul class="nav navbar-nav navbar-right">
-			<li><a href="/">Admin</a></li>
-			
-		</ul>
+
+
 	</div><!-- /.navbar-collapse -->
 </nav>
 
 	<div class="banner">
 		<img src="/images/dug_banner.jpg" alt="">
-	</div> 
+	</div>
 	<div class="product-list container">
 		<div class="panel panel-primary">
 	  <div class="panel-heading">
 			<h3 class="panel-title">Product List</h3>
 	  </div>
 	  <div class="panel-body">
-			
+
 		<table id="example" class="table " cellspacing="0" width="100%">
         <thead>
             <tr>
@@ -63,7 +59,7 @@
                 <th>Descripton</th>
                 <th>Price</th>
                 <th>Purchase</th>
-                
+
             </tr>
         </thead>
         <tfoot>
@@ -75,7 +71,7 @@
             </tr>
         </tfoot>
         <tbody>
-            
+
                #foreach($product in $products)
                <tr>
                 <td>$product.getName()</td>
@@ -84,20 +80,20 @@
                 <form action="/users/$customer.getId()/products/$product.getId()/purchase" method="post">
                 	<td><button type="submit" class="btn btn-success">Purchase</button></td>
                 </form>
-                
+
                   </tr>
                #end
-           
-          
-           
-       
+
+
+
+
         </tbody>
     </table>
-	 
+
 </div>
 
-		
-		
-		
+
+
+
 	</div>
 	</div>
