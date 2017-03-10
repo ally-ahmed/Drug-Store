@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <link rel="icon" type="image/png" href="/images/drugicon.ico">
+    <title>Drug Store</title>
 
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
 
@@ -39,10 +40,75 @@
       #parse($template)
 
     </div>
+#[[
+	<!--   Core JS Files   -->
+ <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+
+			<script
+			  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+			  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+			  crossorigin="anonymous"></script>
+
+	 <script src="/js/moment.min.js"></script>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
+
+		 <script
+	 	 src='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js'></script>
+
+
+
+
+
+<!--  Checkbox, Radio & Switch Plugins -->
+<script src="/js/bootstrap-checkbox-radio-switch.js"></script>
+
+<!--  Charts Plugin -->
+<!-- <script src="/js/chartist.min.js"></script> -->
+
+<!--  Notifications Plugin    -->
+<script src="/js/bootstrap-notify.js"></script>
+
+
+<!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+<script src="/js/light-bootstrap-dashboard.js"></script>
+
+<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+<script src="/js/demo.js"></script>
+
+
+<script src="/js/script.js" charset="utf-8"></script>
+
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		demo.initChartist();
+
+		$.notify({
+			icon: 'pe-7s-eyedropper',
+			message: "Welcome to <b>Drug Store</b> - an affordable haven for the sick."
+
+		}, {
+			type: 'info',
+			timer: 4000
+		});
+
+	});
+
+</script>
+
+
+
+  ]]#
   </body>
 </html>

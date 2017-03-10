@@ -4,7 +4,9 @@ $(document).ready(function() {
     $('#allProducts').DataTable( {
         
     } );
-
+		$('#example').DataTable( {
+        
+    } );
 
 		/* initialize the external events
 		-----------------------------------------------------------------*/
