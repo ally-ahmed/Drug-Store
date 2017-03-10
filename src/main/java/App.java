@@ -75,14 +75,14 @@ public class App {
 		 model.put("template", "templates/calendar.vtl");
 		 return new ModelAndView(model, layout);
 	 }, new VelocityTemplateEngine());
-		
-	
+
+
 	 get("/login", (request, response) -> {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("template", "templates/login.vtl");
 		return new ModelAndView(model, customerlayout);
 	}, new VelocityTemplateEngine());
-		
+
 	get("/users/:id", (request, response) -> {
 		 Map<String, Object> model = new HashMap<String, Object>();
 			model.put("customer",Customer.find(Integer.parseInt(request.params(":id"))));
@@ -101,19 +101,19 @@ public class App {
       return null;
     });
 
-		
-	
-		
 
-		
+
+
+
+
 	post("/users/:customer_id/products/:product_id/purchase", (request, response) -> {
       int customerId = Integer.parseInt(request.params("customer_id"));
       int productId = Integer.parseInt(request.params("product_id"));
       int salePrice;
         Product someProduct = Product.find(productId);
         salePrice = someProduct.getPrice();
-     
-      
+
+
       try{
         someProduct.depleteQuantity(1);
       }
@@ -126,14 +126,14 @@ public class App {
       response.redirect("/users/" + customerId + "/products/" + productId + "/transactions/" + newTransaction.getId());
       return null;
     });
-		
+
 		get("/users/:customer_id/products/:product_id/transactions/:transaction_id", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("customer", Customer.find(Integer.parseInt(request.params(":customer_id"))));
       int productId = Integer.parseInt(request.params("product_id"));
-      
+
         model.put("product", Product.find(Integer.parseInt(request.params(":product_id"))));
-     
+
       model.put("transaction", Transaction.find(Integer.parseInt(request.params(":transaction_id"))));
       model.put("template", "templates/transaction-receipt.vtl");
       return new ModelAndView(model, customerlayout);
@@ -147,6 +147,18 @@ public class App {
 		model.put("template", "templates/out-of-stock.vtl");
 	 return new ModelAndView(model, layout);
 	}, new VelocityTemplateEngine());
+
+	ProcessBuilder process = new ProcessBuilder();
+     Integer port;
+     if (process.environment().get("PORT") != null) {
+         port = Integer.parseInt(process.environment().get("PORT"));
+     } else {
+         port = 4567;
+     }
+
+    setPort(port);
+
+
 
 
 
